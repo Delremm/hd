@@ -34,10 +34,10 @@ class IndexView(TemplateView):
                 with open('%s/%s' % (settings.MEDIA_ROOT, csv_file_name), 'w+') as csv_file:
                     csv_writer = csv.writer(csv_file, delimiter=',')
                     for su in startups:
-                        print(su.name)
-                        print(su.created_at)
-                        print(su.follower_count)
-                        csv_writer.writerow([su.name, su.created_at, su.follower_count])
+                        try:
+                            csv_writer.writerow([su.name, su.created_at, su.follower_count])
+                        except:
+                            pass
                     context['csv_file'] = '%s%s'  % (settings.MEDIA_URL, csv_file_name)
             else:
                 context['message'] = 'now such tag at the moment'
