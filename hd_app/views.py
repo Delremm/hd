@@ -11,7 +11,9 @@ class IndexView(TemplateView):
     template_name="index.html"
 
     def gen_csv_file_name(self):
-        return '%s%s%s' % ('csv/', str(uuid.uuid4()), '.csv')
+        # return '%s%s%s' % ('csv/', str(uuid.uuid4()), '.csv')
+        return '%s%s%s' % ('csv/', 'result', '.csv')
+
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
         if 'form_cvs' in request.GET:
@@ -35,7 +37,7 @@ class IndexView(TemplateView):
                     csv_writer = csv.writer(csv_file, delimiter=',')
                     for su in startups:
                         try:
-                            csv_writer.writerow([su.name, su.created_at, su.follower_count])
+                            csv_writer.writerow([su.name, str(su.created_at)[:10], su.follower_count])
                         except:
                             pass
                     context['csv_file'] = '%s%s'  % (settings.MEDIA_URL, csv_file_name)
