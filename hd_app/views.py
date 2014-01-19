@@ -37,7 +37,7 @@ class IndexView(TemplateView):
                     csv_writer = csv.writer(csv_file, delimiter=',')
                     for su in startups:
                         try:
-                            if su.name and su.created_at and su.follower_count
+                            if su.name and su.created_at and su.follower_count:
                                 csv_writer.writerow([su.name, str(su.created_at)[:10], su.follower_count])
                         except:
                             pass
