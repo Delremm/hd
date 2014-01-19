@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div>
+    {{ message }}<br>
+    {% if csv_file %}
+    {{ csv_file }}
+    <a href='{% static csv_file %}'>link to csv</a>
+    {% endif %}
+</div>
+<div>
+    <form class="form-inline" role="form" method="post">
+      {% csrf_token %}
+      <div class="form-group">
+        <label class="sr-only" for="tag_name">Email address</label>
+        <input type="text" class="form-control" id="tag_name" placeholder="tag name" name="tag_name">
+      </div>
+      <!-- <div class="checkbox">
+        <label>
+          <input type="checkbox"> Remember me
+        </label>
+      </div> -->
+      <button type="submit" class="btn btn-default">Get data</button>
+    </form>
+</div>
+{% endblock %}
